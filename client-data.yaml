@@ -1,0 +1,49 @@
+SLUG: moores-karate-lodi
+GOOGLE_PLACE_ID: "ChIJtest"
+SCHOOL_NAME: "Moore's Karate Lodi"
+MARTIAL_ART: Karate
+SITE_URL: https://www.mooreskaratelodi.com
+DOMAIN: mooreskaratelodi.com
+CITY: Lodi
+STATE: CA
+ZIP: "95242"
+ADDRESS_LINE_1: "1317 W. Lockeford St."
+PHONE: "(209) 369-8395"
+EMAIL: shunshifudoyle@yahoo.com
+HOURS: "Mon–Thu 4:00pm–8:00pm"
+YEAR_FOUNDED: "1975"
+PRIMARY_COLOR: "#cc0000"
+SECONDARY_COLOR: "#ffc700"
+LOGO_IMAGE: brand_assets/logo.svg
+FACEBOOK_URL: https://www.facebook.com/MooresKarateLodi
+INSTAGRAM_URL: https://www.instagram.com/MooresKarateLodi1/
+HERO_IMAGE: images/stock/hero.webp
+HERO_HEADLINE: "Teaching True Self-Defense for Over 50 Years"
+HERO_SUBHEADLINE: "Lodi's Most Trusted Karate School for Kids & Adults"
+HERO_SUBTEXT: "Ready for an adventure? Sign up today and learn the art of effective self-defense."
+STAR_RATING: "5.0"
+REVIEW_COUNT: "40"
+STUDENT_COUNT: "500"
+ABOUT_TEXT: "Moore's Karate has served the Lodi community since 1975, developing confident, disciplined students of all ages."
+INSTRUCTOR_1_NAME: "Shun Doyle"
+INSTRUCTOR_1_PHOTO: images/stock/instructor.webp
+INSTRUCTOR_1_TITLE: "Chief Instructor, 4th Degree Black Belt"
+INSTRUCTOR_1_BIO: "Sensei Doyle has been teaching karate in Lodi for over 30 years. A 4th Degree Black Belt with decades of competition and teaching experience, he brings passion and expertise to every class."
+PROGRAM_1_NAME: "Kids Karate"
+PROGRAM_1_PHOTO: images/stock/program-1.webp
+PROGRAM_1_AGE_RANGE: "Ages 4–12"
+PROGRAM_1_DAYS: "Mon & Wed / Tue & Thu"
+PROGRAM_1_SESSION_LEN: "60-min classes"
+PROGRAM_1_DESCRIPTION: "Fun, safe Karate classes that build discipline, confidence, and self-defense skills. Every belt is earned — our standards are real."
+TRIAL_WEBHOOK_URL: https://services.leadconnectorhq.com/hooks/WKk1TERXTmvZLXyqaUie/webhook-trigger/4f3ba943-f86f-4362-8e18-d707a1e2f357
+STARTER_KIT_WEBHOOK_URL: https://services.leadconnectorhq.com/hooks/WKk1TERXTmvZLXyqaUie/webhook-trigger/4f3ba943-f86f-4362-8e18-d707a1e2f357
+QUIZ_WEBHOOK_URL: https://services.leadconnectorhq.com/hooks/WKk1TERXTmvZLXyqaUie/webhook-trigger/4f3ba943-f86f-4362-8e18-d707a1e2f357
+FINAL_CTA_WEBHOOK_URL: https://services.leadconnectorhq.com/hooks/WKk1TERXTmvZLXyqaUie/webhook-trigger/4f3ba943-f86f-4362-8e18-d707a1e2f357
+BOOKING_CALENDAR_URL: https://api.leadconnectorhq.com/widget/group/nc2OauawmY19YvifUazx
+PRIVACY_POLICY_URL: https://www.mooreskaratelodi.com/privacy
+REVIEWER_1_NAME: Todd Evans
+REVIEWER_1_DATE: "4 months ago"
+REVIEWER_1_TEXT: "My son has been training here for about 4 years. He absolutely loves it! The staff is very kind, knowledgeable and great with the kids."
+REVIEWER_2_NAME: Anna Charlesworth
+REVIEWER_2_DATE: "6 months ago"
+REVIEWER_2_TEXT: "Great place for your kids and adults. My grandson has been taking lessons for over 3 years. The confidence and discipline he has gained is truly remarkable."
