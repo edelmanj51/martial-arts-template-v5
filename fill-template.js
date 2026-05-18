@@ -10,6 +10,7 @@
  * IF blocks, replaces [TOKEN] placeholders, writes finished HTML to dist/.
  *
  * Computed automatically (do NOT put these in client-data.yaml):
+ *   CURRENT_YEAR          current calendar year (for copyright)
  *   YEARS_COUNT           current year minus YEAR_FOUNDED
  *   R_1_INITIAL … R_10_INITIAL   first letter of each reviewer name
  *   GOOGLE_MAPS_EMBED_URL built from address fields
@@ -155,8 +156,9 @@ if (fs.existsSync(QT_FOLDER) && !data.QUICK_TOUR_GALLERY) {
 
 // ── Compute derived values ────────────────────────────────────────────────────
 
-// YEARS_COUNT — computed, never enter manually
-data.YEARS_COUNT = String(new Date().getFullYear() - parseInt(data.YEAR_FOUNDED, 10));
+// CURRENT_YEAR / YEARS_COUNT — computed, never enter manually
+data.CURRENT_YEAR = String(new Date().getFullYear());
+data.YEARS_COUNT  = String(new Date().getFullYear() - parseInt(data.YEAR_FOUNDED, 10));
 
 // R_N_INITIAL — derived from reviewer names, never enter manually
 for (let n = 1; n <= 10; n++) {

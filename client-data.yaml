@@ -1,3 +1,4 @@
+# NOTE: CURRENT_YEAR is also computed automatically (same way as YEARS_COUNT)
 SLUG: moores-karate-lodi
 GOOGLE_PLACE_ID: "ChIJtest"
 SCHOOL_NAME: "Moore's Karate Lodi"
