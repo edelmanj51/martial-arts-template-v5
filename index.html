@@ -57,7 +57,7 @@
       display: block; font-size: 13px; font-weight: 700; letter-spacing: 1.2px;
       text-transform: uppercase; color: var(--secondary); margin-bottom: 10px;
     }
-    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 900; line-height: 1.15; }
+    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 900; line-height: 1.15; letter-spacing: -.5px; }
     .section-sub   { font-size: 18px; color: var(--gray); margin-top: 12px; }
     .section-header { text-align: center; margin-bottom: 52px; }
 
@@ -190,6 +190,13 @@
       width: 100%; height: 100%; object-fit: cover;
     }
     .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.42); }
+    /* Radial glow — gives gradient hero a designed, premium feel */
+    .hero-glow {
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background:
+        radial-gradient(ellipse 60% 55% at 20% 60%, rgba(255,255,255,.055) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 78% 30%, rgba(255,255,255,.04) 0%, transparent 60%);
+    }
     .hero-content {
       position: relative; z-index: 2;
       text-align: center; color: var(--white);
@@ -205,6 +212,7 @@
     }
     .hero-title {
       font-size: clamp(26px, 4vw, 52px); font-weight: 900; line-height: 1.1;
+      letter-spacing: -1px;
       margin-bottom: 16px; text-shadow: 0 2px 24px rgba(0,0,0,.35);
     }
     .hero-title span { color: var(--white); opacity: .88; }
@@ -335,6 +343,7 @@
       border-radius: var(--radius-lg); overflow: hidden;
       box-shadow: var(--shadow); background: var(--white);
       border: 1px solid var(--gray-light);
+      border-top: 3px solid var(--primary);
       display: flex; flex-direction: column;
       transition: var(--transition);
     }
@@ -719,6 +728,7 @@
     <!-- [/IF:HERO_VIDEO] -->
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
 
   <div class="hero-content">
     <div class="hero-badge">⭐ [STAR_RATING] Stars · [REVIEW_COUNT]+ Reviews on Google</div>
@@ -781,8 +791,9 @@
 
 
 <!-- ============================================================
-     TESTIMONIALS (T1–T3 always; T4–T5 conditional)
+     TESTIMONIALS — hidden entirely if no testimonials provided
 ============================================================ -->
+<!-- [IF:TESTIMONIAL_1_QUOTE] -->
 <section id="testimonials" aria-label="Student testimonials">
   <div class="section-header reveal">
     <span class="eyebrow">What Our Community Says</span>
@@ -863,6 +874,7 @@
 
   </div>
 </section>
+<!-- [/IF:TESTIMONIAL_1_QUOTE] -->
 
 
 <!-- ============================================================
@@ -877,7 +889,7 @@
 
   <div class="instructor-inner">
     <div class="instructor-photo reveal">
-      <img src="[INSTRUCTOR_1_PHOTO]" alt="[INSTRUCTOR_1_NAME], [INSTRUCTOR_1_TITLE]" loading="lazy">
+      <img src="[INSTRUCTOR_1_PHOTO]" alt="[INSTRUCTOR_1_NAME], [INSTRUCTOR_1_TITLE]" loading="lazy" onerror="this.closest('.instructor-photo').style.display='none';this.closest('.instructor-inner').style.gridTemplateColumns='1fr'">
       <div class="instructor-badge">[INSTRUCTOR_1_TITLE]</div>
     </div>
     <div class="instructor-content reveal">
@@ -1082,8 +1094,9 @@
 
 
 <!-- ============================================================
-     GOOGLE REVIEWS (all 10 slots conditional)
+     GOOGLE REVIEWS — hidden entirely if no reviews provided
 ============================================================ -->
+<!-- [IF:REVIEWER_1_NAME] -->
 <section id="google-reviews">
   <div class="section-header reveal">
     <div class="google-badge" aria-hidden="true">
@@ -1268,6 +1281,7 @@
 
   </div>
 </section>
+<!-- [/IF:REVIEWER_1_NAME] -->
 
 
 <!-- ============================================================
