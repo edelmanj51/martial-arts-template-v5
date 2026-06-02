@@ -92,12 +92,16 @@ if (/^\d+$/.test(rc)) {
   bad(`REVIEW_COUNT "${rc}" must be a plain integer with no + suffix (template adds + if needed)`);
 }
 
-// ── Check 4: YEAR_FOUNDED is valid → no "since ." in output ──────────────────
-const yr = parseInt(data.YEAR_FOUNDED, 10);
-if (!isNaN(yr) && yr > 1800 && yr < new Date().getFullYear()) {
-  ok(`YEAR_FOUNDED is valid: ${yr}`);
+// ── Check 4: YEAR_FOUNDED is valid (optional) → no "since ." in output ───────
+if (data.YEAR_FOUNDED) {
+  const yr = parseInt(data.YEAR_FOUNDED, 10);
+  if (!isNaN(yr) && yr > 1800 && yr < new Date().getFullYear()) {
+    ok(`YEAR_FOUNDED is valid: ${yr}`);
+  } else {
+    bad(`YEAR_FOUNDED "${data.YEAR_FOUNDED}" is not a valid year`);
+  }
 } else {
-  bad(`YEAR_FOUNDED "${data.YEAR_FOUNDED}" is not a valid year`);
+  ok('YEAR_FOUNDED not set (new school — IF:YEARS_COUNT blocks will be hidden)');
 }
 if (html.includes('since .') || html.includes('Since .')) {
   bad('Footer contains "since ." — YEAR_FOUNDED is empty or not replacing correctly');

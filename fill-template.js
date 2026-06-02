@@ -29,7 +29,7 @@ const IMG_EXT    = /\.(png|jpg|jpeg|webp|gif|svg)$/i;
 // ── Required tokens — build aborts if any are absent or empty ─────────────────
 const REQUIRED = [
   'SCHOOL_NAME', 'MARTIAL_ART', 'SITE_URL', 'CITY', 'STATE',
-  'ADDRESS_LINE_1', 'PHONE', 'HOURS', 'YEAR_FOUNDED',
+  'ADDRESS_LINE_1', 'PHONE', 'HOURS',
   'PRIMARY_COLOR', 'SECONDARY_COLOR', 'LOGO_IMAGE',
   'HERO_IMAGE', 'HERO_HEADLINE', 'HERO_SUBHEADLINE', 'HERO_SUBTEXT',
   'STAR_RATING', 'REVIEW_COUNT', 'STUDENT_COUNT',
@@ -74,9 +74,11 @@ if (isNaN(rating) || rating < 0 || rating > 5)
 if (!String(data.STAR_RATING).includes('.'))
   errs.push(`STAR_RATING must include a decimal point, e.g. 4.9 not "${data.STAR_RATING}" (prevents the integer-display bug)`);
 
-const yr = parseInt(data.YEAR_FOUNDED, 10);
-if (isNaN(yr) || yr < 1800 || yr >= new Date().getFullYear())
-  errs.push(`YEAR_FOUNDED must be a 4-digit year before ${new Date().getFullYear()}, got: "${data.YEAR_FOUNDED}"`);
+if (data.YEAR_FOUNDED) {
+  const yr = parseInt(data.YEAR_FOUNDED, 10);
+  if (isNaN(yr) || yr < 1800 || yr >= new Date().getFullYear())
+    errs.push(`YEAR_FOUNDED must be a 4-digit year before ${new Date().getFullYear()}, got: "${data.YEAR_FOUNDED}"`);
+}
 
 const WEBHOOK_TOKENS = [
   'TRIAL_WEBHOOK_URL', 'STARTER_KIT_WEBHOOK_URL',
@@ -158,7 +160,8 @@ if (fs.existsSync(QT_FOLDER) && !data.QUICK_TOUR_GALLERY) {
 
 // CURRENT_YEAR / YEARS_COUNT — computed, never enter manually
 data.CURRENT_YEAR = String(new Date().getFullYear());
-data.YEARS_COUNT  = String(new Date().getFullYear() - parseInt(data.YEAR_FOUNDED, 10));
+if (data.YEAR_FOUNDED)
+  data.YEARS_COUNT = String(new Date().getFullYear() - parseInt(data.YEAR_FOUNDED, 10));
 
 // R_N_INITIAL — derived from reviewer names, never enter manually
 for (let n = 1; n <= 10; n++) {

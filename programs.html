@@ -196,30 +196,86 @@
     <article class="prog-card reveal" id="program-1">
       <img src="[PROGRAM_1_PHOTO]" alt="[PROGRAM_1_NAME]" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover">
       <div class="prog-body">
-        <span class="prog-tag">Ages 4–12</span>
+        <span class="prog-tag">[PROGRAM_1_AGE_RANGE]</span>
         <h2>[PROGRAM_1_NAME]</h2>
-        <p>Fun, structured [MARTIAL_ART] classes that build real confidence, discipline, and self-defense skills. Our instructors create a safe, welcoming environment where every child can thrive.</p>
+        <p>Fun, structured [MARTIAL_ART] classes that build real confidence, discipline, and self-defense skills. Our instructors create a safe, welcoming environment where every student can thrive.</p>
         <div class="prog-meta">
           <span>[PROGRAM_1_DAYS]</span>
-          <span>60-min classes</span>
+          <!-- [IF:PROGRAM_1_SESSION_LEN] --><span>[PROGRAM_1_SESSION_LEN]</span><!-- [/IF:PROGRAM_1_SESSION_LEN] -->
         </div>
         <a href="program-1.html" class="btn btn-primary">Learn More</a>
       </div>
     </article>
 
-    <article class="prog-card reveal" id="program-2">
+    <!-- [IF:PROGRAM_2_NAME] --><article class="prog-card reveal" id="program-2">
       <img src="[PROGRAM_2_PHOTO]" alt="[PROGRAM_2_NAME]" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover">
       <div class="prog-body">
-        <span class="prog-tag">Ages 13 &amp; Up</span>
+        <span class="prog-tag">[PROGRAM_2_AGE_RANGE]</span>
         <h2>[PROGRAM_2_NAME]</h2>
         <p>Learn [MARTIAL_ART] in a structured curriculum with real belt standards. Build self-defense skills, get fit, and train in a welcoming community — no experience required.</p>
         <div class="prog-meta">
           <span>[PROGRAM_2_DAYS]</span>
-          <span>60-min classes</span>
+          <!-- [IF:PROGRAM_2_SESSION_LEN] --><span>[PROGRAM_2_SESSION_LEN]</span><!-- [/IF:PROGRAM_2_SESSION_LEN] -->
         </div>
         <a href="program-2.html" class="btn btn-primary">Learn More</a>
       </div>
-    </article>
+    </article><!-- [/IF:PROGRAM_2_NAME] -->
+
+    <!-- [IF:PROGRAM_3_NAME] --><article class="prog-card reveal" id="program-3">
+      <img src="[PROGRAM_3_PHOTO]" alt="[PROGRAM_3_NAME]" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover">
+      <div class="prog-body">
+        <span class="prog-tag">[PROGRAM_3_AGE_RANGE]</span>
+        <h2>[PROGRAM_3_NAME]</h2>
+        <p>Develop real [MARTIAL_ART] skills, build strength and focus, and train alongside a welcoming community — no prior experience needed.</p>
+        <div class="prog-meta">
+          <span>[PROGRAM_3_DAYS]</span>
+          <!-- [IF:PROGRAM_3_SESSION_LEN] --><span>[PROGRAM_3_SESSION_LEN]</span><!-- [/IF:PROGRAM_3_SESSION_LEN] -->
+        </div>
+        <a href="program-3.html" class="btn btn-primary">Learn More</a>
+      </div>
+    </article><!-- [/IF:PROGRAM_3_NAME] -->
+
+    <!-- [IF:PROGRAM_4_NAME] --><article class="prog-card reveal" id="program-4">
+      <img src="[PROGRAM_4_PHOTO]" alt="[PROGRAM_4_NAME]" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover">
+      <div class="prog-body">
+        <span class="prog-tag">[PROGRAM_4_AGE_RANGE]</span>
+        <h2>[PROGRAM_4_NAME]</h2>
+        <p>Take your training to the next level with focused coaching, real competition prep, and a team that pushes you to perform your best.</p>
+        <div class="prog-meta">
+          <span>[PROGRAM_4_DAYS]</span>
+          <!-- [IF:PROGRAM_4_SESSION_LEN] --><span>[PROGRAM_4_SESSION_LEN]</span><!-- [/IF:PROGRAM_4_SESSION_LEN] -->
+        </div>
+        <a href="program-4.html" class="btn btn-primary">Learn More</a>
+      </div>
+    </article><!-- [/IF:PROGRAM_4_NAME] -->
+
+    <!-- [IF:PROGRAM_5_NAME] --><article class="prog-card reveal" id="program-5">
+      <img src="[PROGRAM_5_PHOTO]" alt="[PROGRAM_5_NAME]" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover">
+      <div class="prog-body">
+        <span class="prog-tag">[PROGRAM_5_AGE_RANGE]</span>
+        <h2>[PROGRAM_5_NAME]</h2>
+        <p>A specialized [MARTIAL_ART] program designed to challenge and inspire students at every stage of their journey.</p>
+        <div class="prog-meta">
+          <span>[PROGRAM_5_DAYS]</span>
+          <!-- [IF:PROGRAM_5_SESSION_LEN] --><span>[PROGRAM_5_SESSION_LEN]</span><!-- [/IF:PROGRAM_5_SESSION_LEN] -->
+        </div>
+        <a href="program-5.html" class="btn btn-primary">Learn More</a>
+      </div>
+    </article><!-- [/IF:PROGRAM_5_NAME] -->
+
+    <!-- [IF:PROGRAM_6_NAME] --><article class="prog-card reveal" id="program-6">
+      <img src="[PROGRAM_6_PHOTO]" alt="[PROGRAM_6_NAME]" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover">
+      <div class="prog-body">
+        <span class="prog-tag">[PROGRAM_6_AGE_RANGE]</span>
+        <h2>[PROGRAM_6_NAME]</h2>
+        <p>A specialized [MARTIAL_ART] program designed to challenge and inspire students at every stage of their journey.</p>
+        <div class="prog-meta">
+          <span>[PROGRAM_6_DAYS]</span>
+          <!-- [IF:PROGRAM_6_SESSION_LEN] --><span>[PROGRAM_6_SESSION_LEN]</span><!-- [/IF:PROGRAM_6_SESSION_LEN] -->
+        </div>
+        <a href="program-6.html" class="btn btn-primary">Learn More</a>
+      </div>
+    </article><!-- [/IF:PROGRAM_6_NAME] -->
 
   </div>
 </section>
@@ -286,7 +342,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© [YEAR_FOUNDED] [SCHOOL_NAME]. All rights reserved.</p>
+    <p>© [CURRENT_YEAR] [SCHOOL_NAME]. All rights reserved.</p>
     <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Sitemap</a></div>
   </div>
 </footer>

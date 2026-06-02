@@ -203,12 +203,12 @@
   <div class="tour-hero-grid">
     <div class="tour-hero-text reveal">
       <h1>Quick Tour of [SCHOOL_NAME]</h1>
-      <p>[SCHOOL_NAME] is [CITY]'s most welcoming martial arts school. Our facility features professional-grade training mats, a dedicated kids area, and a community that feels like family. Come see what [YEARS_COUNT] years of serving [CITY] looks like from the inside.</p>
+      <p>[SCHOOL_NAME] is [CITY]'s most welcoming martial arts school. Our facility features professional-grade training mats, a dedicated kids area, and a community that feels like family.<!-- [IF:YEARS_COUNT] --> Come see what [YEARS_COUNT] years of serving [CITY] looks like from the inside.<!-- [/IF:YEARS_COUNT] --></p>
       <button class="btn btn-primary" onclick="openModal('modal-trial')">Get Started — Free Intro Class</button>
     </div>
-    <div class="tour-hero-photo reveal">
-      <img src="images/exterior-storefront-moores-karate.jpg" alt="[SCHOOL_NAME] facility in [CITY]" loading="eager">
-    </div>
+    <!-- [IF:QUICK_TOUR_HERO_IMAGE] --><div class="tour-hero-photo reveal">
+      <img src="[QUICK_TOUR_HERO_IMAGE]" alt="[SCHOOL_NAME] facility in [CITY]" loading="eager">
+    </div><!-- [/IF:QUICK_TOUR_HERO_IMAGE] -->
   </div>
 </section>
 
@@ -280,7 +280,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© [YEAR_FOUNDED] [SCHOOL_NAME]. All rights reserved.</p>
+    <p>© [CURRENT_YEAR] [SCHOOL_NAME]. All rights reserved.</p>
     <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Sitemap</a></div>
   </div>
 </footer>
