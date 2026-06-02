@@ -35,7 +35,7 @@ if (!fs.existsSync('client-data.yaml')) {
 }
 const data = yaml.load(fs.readFileSync('client-data.yaml', 'utf8')) || {};
 
-// ── Load dist/index.html ──────────────────────────────────────────────────────
+// ── Load dist/index.html (primary) and all other dist/*.html ─────────────────
 const DIST_INDEX = path.join('dist', 'index.html');
 if (!fs.existsSync(DIST_INDEX)) {
   console.error('ERROR: dist/index.html not found. Run fill-template.js first.');
@@ -43,17 +43,29 @@ if (!fs.existsSync(DIST_INDEX)) {
 }
 const html = fs.readFileSync(DIST_INDEX, 'utf8');
 
+// Load all dist HTML files for Check 1 (unfilled token scan)
+const distHtmlFiles = fs.readdirSync('dist')
+  .filter(f => f.endsWith('.html'))
+  .map(f => path.join('dist', f));
+
 console.log('\n🔍  Running Combat Boost QC checks...\n');
 
-// ── Check 1: No unfilled [TOKEN] patterns in dist/index.html ──────────────────
+// ── Check 1: No unfilled [TOKEN] patterns in any dist/*.html ──────────────────
 const TOKEN_RE = /\[[A-Z][A-Z_0-9]+\]/g;
-const tokens   = [...html.matchAll(TOKEN_RE)].map(m => m[0]);
-// Exclude false positives: CSS attribute selectors like [type=submit], [data-count]
-const realTokens = tokens.filter(t => /^\[[A-Z][A-Z_0-9]+\]$/.test(t));
-if (realTokens.length === 0) {
-  ok('No unfilled [TOKEN] placeholders in dist/index.html');
+let allUnfilled = [];
+for (const f of distHtmlFiles) {
+  const content = fs.readFileSync(f, 'utf8');
+  const found = [...content.matchAll(TOKEN_RE)]
+    .map(m => m[0])
+    .filter(t => /^\[[A-Z][A-Z_0-9]+\]$/.test(t));
+  if (found.length > 0) {
+    allUnfilled.push(`${path.basename(f)}: ${[...new Set(found)].join(', ')}`);
+  }
+}
+if (allUnfilled.length === 0) {
+  ok('No unfilled [TOKEN] placeholders in any dist/*.html');
 } else {
-  bad(`Unfilled tokens found in dist/index.html: ${[...new Set(realTokens)].join(', ')}`);
+  for (const line of allUnfilled) bad(`Unfilled tokens — ${line}`);
 }
 
 // ── Check 2: STAR_RATING is a valid decimal 0.0–5.0 ──────────────────────────
