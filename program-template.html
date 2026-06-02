@@ -14,6 +14,11 @@
     button{cursor:pointer;border:none;outline:none;font-family:inherit}
     ul{list-style:none}
     :root{
+      --primary:        [PRIMARY_COLOR];
+      --primary-dark:   color-mix(in srgb, [PRIMARY_COLOR] 80%, black);
+      --secondary:      [SECONDARY_COLOR];
+      --secondary-dark: color-mix(in srgb, [SECONDARY_COLOR] 80%, black);
+      --secondary-light:color-mix(in srgb, [SECONDARY_COLOR] 15%, white);
       --red:var(--primary);--red-dark:var(--primary-dark);--blue:var(--secondary);--blue-dark:var(--secondary-dark);--blue-light:var(--secondary-light);
       --gold:var(--secondary);
       --dark:#0f172a;--dark-2:#1e293b;--gray:#64748b;
