@@ -167,7 +167,7 @@
           <a href="programs.html">Programs</a>
           <div class="dropdown-menu">
             <a href="program-1.html">[PROGRAM_1_NAME]</a>
-            <a href="program-2.html">[PROGRAM_2_NAME]</a>
+            <!-- [IF:PROGRAM_2_NAME] --><a href="program-2.html">[PROGRAM_2_NAME]</a><!-- [/IF:PROGRAM_2_NAME] -->
             <!-- [IF:PROGRAM_3_NAME] --><a href="program-3.html">[PROGRAM_3_NAME]</a><!-- [/IF:PROGRAM_3_NAME] -->
 
             <!-- [IF:PROGRAM_4_NAME] --><a href="program-4.html">[PROGRAM_4_NAME]</a><!-- [/IF:PROGRAM_4_NAME] -->
@@ -206,9 +206,11 @@
     <span class="schedule-note">Schedule subject to change — check with the front desk for the latest updates</span>
   </div>
 
+  <!-- [IF:CLASS_SCHEDULE_HTML] -->
   <div class="schedule-wrap reveal">
     [CLASS_SCHEDULE_HTML]
   </div>
+  <!-- [/IF:CLASS_SCHEDULE_HTML] -->
 
   <div class="legend reveal">
     <div class="legend-item"><div class="legend-dot" style="background:#fef3c7;border:1px solid #d97706"></div>[PROGRAM_1_NAME]</div>
@@ -256,7 +258,7 @@
       <h4>Programs</h4>
       <ul>
         <li><a href="program-1.html">[PROGRAM_1_NAME]</a></li>
-        <li><a href="program-2.html">[PROGRAM_2_NAME]</a></li>
+        <!-- [IF:PROGRAM_2_NAME] --><li><a href="program-2.html">[PROGRAM_2_NAME]</a></li><!-- [/IF:PROGRAM_2_NAME] -->
         <!-- [IF:PROGRAM_3_NAME] --><li><a href="program-3.html">[PROGRAM_3_NAME]</a></li><!-- [/IF:PROGRAM_3_NAME] -->
 
         <!-- [IF:PROGRAM_4_NAME] --><li><a href="program-4.html">[PROGRAM_4_NAME]</a></li><!-- [/IF:PROGRAM_4_NAME] -->

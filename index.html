@@ -778,14 +778,18 @@
       <div class="proof-number" data-count="[REVIEW_COUNT]" data-suffix="+" aria-label="[REVIEW_COUNT]+ reviews">0</div>
       <div class="proof-label">5-Star Google Reviews</div>
     </div>
+    <!-- [IF:STUDENT_COUNT] -->
     <div class="proof-item">
       <div class="proof-number" data-count="[STUDENT_COUNT]" data-suffix="+" aria-label="[STUDENT_COUNT]+ students">0</div>
       <div class="proof-label">Students Trained</div>
     </div>
+    <!-- [/IF:STUDENT_COUNT] -->
+    <!-- [IF:YEARS_COUNT] -->
     <div class="proof-item">
       <div class="proof-number" data-count="[YEARS_COUNT]" data-suffix="" aria-label="[YEARS_COUNT] years">0</div>
       <div class="proof-label">Years of Excellence</div>
     </div>
+    <!-- [/IF:YEARS_COUNT] -->
   </div>
 </section>
 
@@ -923,7 +927,7 @@
         <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       </div>
       <h3>Serious Black Belt School</h3>
-      <p>Students earn every belt by demonstrating real technique — we don't hand out ranks. With a [STAR_RATING]-star Google rating and [YEARS_COUNT] years in [CITY], our standards speak for themselves.</p>
+      <p>Students earn every belt by demonstrating real technique — we don't hand out ranks. With a [STAR_RATING]-star Google rating<!-- [IF:YEARS_COUNT] --> and [YEARS_COUNT] years in [CITY]<!-- [/IF:YEARS_COUNT] -->, our standards speak for themselves.</p>
     </div>
 
     <div class="why-card reveal">
@@ -1492,7 +1496,7 @@
         <img src="[LOGO_IMAGE]" alt="[SCHOOL_NAME] logo" style="height:36px;width:auto" onerror="this.style.display='none'">
         [SCHOOL_NAME]
       </a>
-      <p>[SCHOOL_NAME] has been [CITY]'s trusted [MARTIAL_ART] school since [YEAR_FOUNDED]. We develop confidence, discipline, and real self-defense skills in students of all ages and experience levels.</p>
+      <p>[SCHOOL_NAME]<!-- [IF:YEAR_FOUNDED] --> has been [CITY]'s trusted [MARTIAL_ART] school since [YEAR_FOUNDED] and<!-- [/IF:YEAR_FOUNDED] --> develops confidence, discipline, and real self-defense skills in students of all ages and experience levels.</p>
       <div class="social-links" aria-label="Social media links">
         <!-- [IF:FACEBOOK_URL] -->
         <a href="[FACEBOOK_URL]" class="social-link" aria-label="Facebook" target="_blank" rel="noopener">
@@ -1599,6 +1603,8 @@
             <!-- [IF:PROGRAM_2_NAME] --><option value="program-2">[PROGRAM_2_NAME]</option><!-- [/IF:PROGRAM_2_NAME] -->
             <!-- [IF:PROGRAM_3_NAME] --><option value="program-3">[PROGRAM_3_NAME]</option><!-- [/IF:PROGRAM_3_NAME] -->
             <!-- [IF:PROGRAM_4_NAME] --><option value="program-4">[PROGRAM_4_NAME]</option><!-- [/IF:PROGRAM_4_NAME] -->
+            <!-- [IF:PROGRAM_5_NAME] --><option value="program-5">[PROGRAM_5_NAME]</option><!-- [/IF:PROGRAM_5_NAME] -->
+            <!-- [IF:PROGRAM_6_NAME] --><option value="program-6">[PROGRAM_6_NAME]</option><!-- [/IF:PROGRAM_6_NAME] -->
             <option value="not-sure">Not Sure</option>
           </select>
         </div>
@@ -1653,6 +1659,8 @@
             <!-- [IF:PROGRAM_2_NAME] --><option value="program-2">[PROGRAM_2_NAME]</option><!-- [/IF:PROGRAM_2_NAME] -->
             <!-- [IF:PROGRAM_3_NAME] --><option value="program-3">[PROGRAM_3_NAME]</option><!-- [/IF:PROGRAM_3_NAME] -->
             <!-- [IF:PROGRAM_4_NAME] --><option value="program-4">[PROGRAM_4_NAME]</option><!-- [/IF:PROGRAM_4_NAME] -->
+            <!-- [IF:PROGRAM_5_NAME] --><option value="program-5">[PROGRAM_5_NAME]</option><!-- [/IF:PROGRAM_5_NAME] -->
+            <!-- [IF:PROGRAM_6_NAME] --><option value="program-6">[PROGRAM_6_NAME]</option><!-- [/IF:PROGRAM_6_NAME] -->
             <option value="not-sure">Not Sure</option>
           </select>
         </div>

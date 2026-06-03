@@ -104,22 +104,31 @@ if (CHECK_ONLY) {
 }
 
 // ── Auto-populate image slots from folder structure ───────────────────────────
-// Drop any image file into images/{slot}/ and it gets picked up automatically.
-const IMAGE_SLOTS = {
-  'images/hero':              'HERO_IMAGE',
-  'images/instructor':        'INSTRUCTOR_1_PHOTO',
-  'images/programs/program-1': 'PROGRAM_1_PHOTO',
-  'images/programs/program-2': 'PROGRAM_2_PHOTO',
-  'images/programs/program-3': 'PROGRAM_3_PHOTO',
-  'images/programs/program-4': 'PROGRAM_4_PHOTO',
-  'images/programs/program-5': 'PROGRAM_5_PHOTO',
-  'images/programs/program-6': 'PROGRAM_6_PHOTO',
-};
+// Drop an image into images/{slot}/ and it gets picked up automatically.
+// Canonical filenames are preferred over alphabetical first-match:
+//   hero/       → hero.jpg  (or hero.webp, hero.png)
+//   instructor/ → instructor-1/, instructor-2/, instructor-3/ subfolders
+//   programs/   → main.jpg  (or main.webp, main.png) inside each program-N/
+const IMAGE_SLOTS = [
+  { folder: 'images/hero',                    token: 'HERO_IMAGE',         prefer: ['hero.jpg', 'hero.webp', 'hero.png'] },
+  { folder: 'images/instructor/instructor-1', token: 'INSTRUCTOR_1_PHOTO', prefer: [] },
+  { folder: 'images/instructor/instructor-2', token: 'INSTRUCTOR_2_PHOTO', prefer: [] },
+  { folder: 'images/instructor/instructor-3', token: 'INSTRUCTOR_3_PHOTO', prefer: [] },
+  { folder: 'images/programs/program-1',      token: 'PROGRAM_1_PHOTO',    prefer: ['main.jpg', 'main.webp', 'main.png'] },
+  { folder: 'images/programs/program-2',      token: 'PROGRAM_2_PHOTO',    prefer: ['main.jpg', 'main.webp', 'main.png'] },
+  { folder: 'images/programs/program-3',      token: 'PROGRAM_3_PHOTO',    prefer: ['main.jpg', 'main.webp', 'main.png'] },
+  { folder: 'images/programs/program-4',      token: 'PROGRAM_4_PHOTO',    prefer: ['main.jpg', 'main.webp', 'main.png'] },
+  { folder: 'images/programs/program-5',      token: 'PROGRAM_5_PHOTO',    prefer: ['main.jpg', 'main.webp', 'main.png'] },
+  { folder: 'images/programs/program-6',      token: 'PROGRAM_6_PHOTO',    prefer: ['main.jpg', 'main.webp', 'main.png'] },
+];
 
-for (const [folder, token] of Object.entries(IMAGE_SLOTS)) {
+for (const { folder, token, prefer } of IMAGE_SLOTS) {
   if (!data[token] && fs.existsSync(folder)) {
     const files = fs.readdirSync(folder).filter(f => IMG_EXT.test(f));
-    if (files.length > 0) data[token] = `${folder}/${files[0]}`;
+    if (files.length > 0) {
+      const match = prefer.find(p => files.includes(p)) || files[0];
+      data[token] = `${folder}/${match}`;
+    }
   }
 }
 
@@ -254,11 +263,14 @@ for (const file of htmlFiles) {
 //   [PROGRAM_DESCRIPTION] → PROGRAM_N_DESCRIPTION
 if (fs.existsSync('program-template.html')) {
   const GENERIC_MAP = [
-    ['PROGRAM_NAME',        n => `PROGRAM_${n}_NAME`],
-    ['AGE_RANGE',           n => `PROGRAM_${n}_AGE_RANGE`],
-    ['PROGRAM_PHOTO',       n => `PROGRAM_${n}_PHOTO`],
-    ['PROGRAM_DAYS',        n => `PROGRAM_${n}_DAYS`],
-    ['PROGRAM_DESCRIPTION', n => `PROGRAM_${n}_DESCRIPTION`],
+    ['PROGRAM_NAME',            n => `PROGRAM_${n}_NAME`],
+    ['AGE_RANGE',               n => `PROGRAM_${n}_AGE_RANGE`],
+    ['PROGRAM_PHOTO',           n => `PROGRAM_${n}_PHOTO`],
+    ['PROGRAM_DAYS',            n => `PROGRAM_${n}_DAYS`],
+    ['PROGRAM_DESCRIPTION',     n => `PROGRAM_${n}_DESCRIPTION`],
+    ['PROGRAM_AUDIENCE_KIDS',   n => `PROGRAM_${n}_AUDIENCE_KIDS`],
+    ['PROGRAM_AUDIENCE_TEENS',  n => `PROGRAM_${n}_AUDIENCE_TEENS`],
+    ['PROGRAM_AUDIENCE_ADULTS', n => `PROGRAM_${n}_AUDIENCE_ADULTS`],
   ];
 
   for (let n = 1; n <= 6; n++) {
@@ -269,14 +281,15 @@ if (fs.existsSync('program-template.html')) {
 
     let page = fs.readFileSync('program-template.html', 'utf8');
 
-    // Map generic tokens to this program's numbered values
+    // Build a page-level data overlay so generic tokens are available to IF blocks
+    const pageData = Object.assign({}, data);
     for (const [generic, getKey] of GENERIC_MAP) {
       const val = data[getKey(n)];
-      if (val) page = page.split(`[${generic}]`).join(String(val));
+      if (val) { pageData[generic] = val; page = page.split(`[${generic}]`).join(String(val)); }
     }
 
-    page = processIfBlocks(page, data);
-    page = replaceTokens(page, data);
+    page = processIfBlocks(page, pageData);
+    page = replaceTokens(page, pageData);
 
     // Collect unfilled tokens from generated pages
     TOKEN_RE.lastIndex = 0;
