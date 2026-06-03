@@ -22,9 +22,9 @@ HERO_IMAGE: images/stock/hero.webp
 HERO_HEADLINE: "Teaching True Self-Defense for Over 50 Years"
 HERO_SUBHEADLINE: "Lodi's Most Trusted Karate School for Kids & Adults"
 HERO_SUBTEXT: "Ready for an adventure? Sign up today and learn the art of effective self-defense."
+SHOW_PROOF_BAR: "true"
 STAR_RATING: "5.0"
 REVIEW_COUNT: "40"
-STUDENT_COUNT: "500"
 ABOUT_TEXT: "Moore's Karate has served the Lodi community since 1975, developing confident, disciplined students of all ages."
 INSTRUCTOR_1_NAME: "Shun Doyle"
 INSTRUCTOR_1_PHOTO: images/stock/instructor.webp
