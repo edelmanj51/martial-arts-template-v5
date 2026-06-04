@@ -56,53 +56,6 @@ try {
   process.exit(1);
 }
 
-// ── Fail-fast: required tokens ────────────────────────────────────────────────
-const missing = REQUIRED.filter(t => !data[t] || String(data[t]).trim() === '');
-if (missing.length > 0) {
-  console.error('\n🚫  REQUIRED TOKENS MISSING — build aborted:\n');
-  missing.forEach(t => console.error(`     [${t}]`));
-  console.error('\nFill these in client-data.yaml then retry.\n');
-  process.exit(1);
-}
-
-// ── Fail-fast: format validation ──────────────────────────────────────────────
-const errs = [];
-
-const rating = parseFloat(data.STAR_RATING);
-if (isNaN(rating) || rating < 0 || rating > 5)
-  errs.push(`STAR_RATING must be 0.0–5.0, got: "${data.STAR_RATING}"`);
-if (!String(data.STAR_RATING).includes('.'))
-  errs.push(`STAR_RATING must include a decimal point, e.g. 4.9 not "${data.STAR_RATING}" (prevents the integer-display bug)`);
-
-if (data.YEAR_FOUNDED) {
-  const yr = parseInt(data.YEAR_FOUNDED, 10);
-  if (isNaN(yr) || yr < 1800 || yr >= new Date().getFullYear())
-    errs.push(`YEAR_FOUNDED must be a 4-digit year before ${new Date().getFullYear()}, got: "${data.YEAR_FOUNDED}"`);
-}
-
-const WEBHOOK_TOKENS = [
-  'TRIAL_WEBHOOK_URL', 'STARTER_KIT_WEBHOOK_URL',
-  'QUIZ_WEBHOOK_URL', 'FINAL_CTA_WEBHOOK_URL', 'BOOKING_CALENDAR_URL',
-];
-for (const t of WEBHOOK_TOKENS) {
-  const v = String(data[t] || '');
-  if (!v.startsWith('https://'))
-    errs.push(`${t} must start with https://, got: "${v}"`);
-  if (/^\[/.test(v))
-    errs.push(`${t} looks like an unfilled placeholder: "${v}"`);
-}
-
-if (errs.length > 0) {
-  console.error('\n🚫  VALIDATION ERRORS — build aborted:\n');
-  errs.forEach(e => console.error(`     ${e}`));
-  process.exit(1);
-}
-
-if (CHECK_ONLY) {
-  console.log('✅  client-data.yaml is valid — all required tokens present and formatted correctly.');
-  process.exit(0);
-}
-
 // ── Auto-populate image slots from folder structure ───────────────────────────
 // Drop an image into images/{slot}/ and it gets picked up automatically.
 // Canonical filenames are preferred over alphabetical first-match:
@@ -165,6 +118,53 @@ if (fs.existsSync(QT_FOLDER) && !data.QUICK_TOUR_GALLERY) {
   }
 }
 
+// ── Fail-fast: required tokens ────────────────────────────────────────────────
+const missing = REQUIRED.filter(t => !data[t] || String(data[t]).trim() === '');
+if (missing.length > 0) {
+  console.error('\n🚫  REQUIRED TOKENS MISSING — build aborted:\n');
+  missing.forEach(t => console.error(`     [${t}]`));
+  console.error('\nFill these in client-data.yaml then retry.\n');
+  process.exit(1);
+}
+
+// ── Fail-fast: format validation ──────────────────────────────────────────────
+const errs = [];
+
+const rating = parseFloat(data.STAR_RATING);
+if (isNaN(rating) || rating < 0 || rating > 5)
+  errs.push(`STAR_RATING must be 0.0–5.0, got: "${data.STAR_RATING}"`);
+if (!String(data.STAR_RATING).includes('.'))
+  errs.push(`STAR_RATING must include a decimal point, e.g. 4.9 not "${data.STAR_RATING}" (prevents the integer-display bug)`);
+
+if (data.YEAR_FOUNDED) {
+  const yr = parseInt(data.YEAR_FOUNDED, 10);
+  if (isNaN(yr) || yr < 1800 || yr >= new Date().getFullYear())
+    errs.push(`YEAR_FOUNDED must be a 4-digit year before ${new Date().getFullYear()}, got: "${data.YEAR_FOUNDED}"`);
+}
+
+const WEBHOOK_TOKENS = [
+  'TRIAL_WEBHOOK_URL', 'STARTER_KIT_WEBHOOK_URL',
+  'QUIZ_WEBHOOK_URL', 'FINAL_CTA_WEBHOOK_URL', 'BOOKING_CALENDAR_URL',
+];
+for (const t of WEBHOOK_TOKENS) {
+  const v = String(data[t] || '');
+  if (!v.startsWith('https://'))
+    errs.push(`${t} must start with https://, got: "${v}"`);
+  if (/^\[/.test(v))
+    errs.push(`${t} looks like an unfilled placeholder: "${v}"`);
+}
+
+if (errs.length > 0) {
+  console.error('\n🚫  VALIDATION ERRORS — build aborted:\n');
+  errs.forEach(e => console.error(`     ${e}`));
+  process.exit(1);
+}
+
+if (CHECK_ONLY) {
+  console.log('✅  client-data.yaml is valid — all required tokens present and formatted correctly.');
+  process.exit(0);
+}
+
 // ── Compute derived values ────────────────────────────────────────────────────
 
 // CURRENT_YEAR / YEARS_COUNT — computed, never enter manually
@@ -215,7 +215,8 @@ function processIfBlocks(html, data) {
     prev = html;
     html = html.replace(IF_RE, (_, token, inner) => {
       const val = data[token];
-      return (val && String(val).trim() !== '') ? inner : '';
+      const active = val && String(val).trim() !== '' && String(val).trim().toLowerCase() !== 'false';
+      return active ? inner : '';
     });
   } while (html !== prev);
   return html;

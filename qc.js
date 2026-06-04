@@ -35,6 +35,23 @@ if (!fs.existsSync('client-data.yaml')) {
 }
 const data = yaml.load(fs.readFileSync('client-data.yaml', 'utf8')) || {};
 
+// Apply same auto-population as fill-template.js so image checks work for
+// tokens that are resolved from folder structure rather than set explicitly.
+const IMG_EXT_QC = /\.(jpg|jpeg|webp|png|gif|avif)$/i;
+const IMAGE_SLOTS_QC = [
+  { folder: 'images/hero',                    token: 'HERO_IMAGE',         prefer: ['hero.jpg', 'hero.webp', 'hero.png'] },
+  { folder: 'images/instructor/instructor-1', token: 'INSTRUCTOR_1_PHOTO', prefer: [] },
+];
+for (const { folder, token, prefer } of IMAGE_SLOTS_QC) {
+  if (!data[token] && fs.existsSync(folder)) {
+    const files = fs.readdirSync(folder).filter(f => IMG_EXT_QC.test(f));
+    if (files.length > 0) {
+      const match = prefer.find(p => files.includes(p)) || files[0];
+      data[token] = `${folder}/${match}`;
+    }
+  }
+}
+
 // ── Load dist/index.html (primary) and all other dist/*.html ─────────────────
 const DIST_INDEX = path.join('dist', 'index.html');
 if (!fs.existsSync(DIST_INDEX)) {
